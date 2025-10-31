@@ -9,3 +9,4 @@
 - [x] Create Verify.jsx page for Stripe payment verification.
 - [x] Add /verify route in frontend App.jsx.
 - [x] Test order placement for COD and Stripe after fixes.
+- [x] Restore frontend directory as submodule after accidental deletion.
