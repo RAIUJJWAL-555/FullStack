@@ -23,7 +23,8 @@ app.use(cors({
     "https://forevershoping.vercel.app",
     "https://full-stack-admin1.vercel.app",  // ← add your admin panel domain
     "https://myforever-pink.vercel.app",
-    "http://localhost:5173"  // optional, for local dev
+    "http://localhost:5181" , // optional, for local dev
+    "http://localhost:5180"  // optional, for local dev
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "token"],
