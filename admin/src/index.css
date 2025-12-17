@@ -1,17 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-  font-family: Outfit;
+@layer base {
+  body {
+    font-family: 'Outfit', sans-serif;
+    @apply bg-gray-50 text-gray-800 antialiased;
+  }
 }
-select,input,textarea{
- border: 1px solid #c2c2c2;
- outline-color: #C586A5;
- border-radius: 4px;
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 shadow-md transform active:scale-95;
+  }
+  
+  .card {
+    @apply bg-white p-6 rounded-xl shadow-[0_4px_20px_rgb(0,0,0,0.05)] border border-gray-100;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200;
+  }
 }
-.active{
-  background-color: #ffebf5;
-  border-color: #C586A5;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

@@ -52,10 +52,22 @@ const List = ({token}) => {
 
   return (
     <>
-      <p className='mb-2'>ALL Products List</p>
+      <div className="card w-full shadow-xl border-t-4 border-primary">
+        <div className="border-b border-gray-100 pb-4 mb-4 flex items-center justify-between">
+           <div>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Product List</h2>
+              <p className="text-sm text-gray-500 mt-1">Manage your store's products.</p>
+           </div>
+           {list.length > 0 && (
+             <span className="bg-indigo-50 text-primary px-4 py-1.5 rounded-full text-xs font-bold border border-indigo-100">
+               {list.length} Items
+             </span>
+           )}
+        </div>
+
       <div className="flex flex-col gap-2">
   {/* Table Header */}
-  <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-2 px-2 font-bold border-b">
+  <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-4 px-4 bg-indigo-50/50 rounded-xl font-bold text-gray-600 text-sm uppercase tracking-wide">
     <p>Image</p>
     <p>Name</p>
     <p>Category</p>
@@ -64,23 +76,32 @@ const List = ({token}) => {
   </div>
 
   {/* Product List */}
+  <div className="flex flex-col gap-3 mt-2">
   {list.map((item, index) => (
     <div
       key={index}
-      className="grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-2 px-2 border-b"
+      className="grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-4 px-4 border border-gray-100 rounded-xl hover:shadow-lg transition-all duration-300 bg-white hover:border-indigo-100 group"
     >
       <img
-        src={item.image[0]}   // ✅ confirm your API sends `image: ["url"]`
+        src={item.image[0]}
         alt={item.name}
-        className="w-12 h-12 object-cover rounded"
+        className="w-14 h-14 object-cover rounded-lg border border-gray-200 group-hover:scale-105 transition-transform duration-300"
       />
-      <p>{item.name}</p>
-      <p>{item.category}</p>
-      <p>{currency}{item.price}</p>
-      <button onClick={()=>removeProduct(item._id)} className="text-red-500 text-center">X</button>
+      <p className="font-semibold text-gray-800 truncate pr-4 group-hover:text-primary transition-colors">{item.name}</p>
+      <p className="text-gray-600 bg-gray-50 inline-block w-fit px-3 py-1 rounded-full text-xs font-medium">{item.category}</p>
+      <p className="text-primary font-bold text-base">{currency}{item.price}</p>
+      <button 
+        onClick={()=>removeProduct(item._id)} 
+        className="text-gray-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-full transition-all duration-300 text-center mx-auto block hover:rotate-90"
+        title="Remove Product"
+      >
+        <p className="text-xl leading-none">×</p> 
+      </button>
     </div>
   ))}
+  </div>
 
+</div>
 </div>
 
     </>

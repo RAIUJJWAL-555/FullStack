@@ -19,27 +19,28 @@ const App = () => {
     localStorage.setItem('token',token)
   },[token])
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen font-outfit">
       <ToastContainer/>
 
       {token === "" ? (
         <Login setToken={setToken} />
       ) : (
-        <>
-          <Navbar setToken={setToken} />
-          <hr />
-          <div className="flex w-full">
-            <Sidebar />
-            <div className="w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base">
-              <Routes>
-                <Route path="/" element={<h1 className="text-2xl">Welcome Admin</h1>} />
-                <Route path="/add" element={<Add token={token} />} />
-                <Route path="/orders" element={<Orders token={token} />} />
-                <Route path="/list" element={<List token={token} />} />
-              </Routes>
-            </div>
+        <div className="flex w-full min-h-screen">
+          <Sidebar />
+          <div className="flex flex-col flex-1 w-full overflow-hidden">
+             <Navbar setToken={setToken} />
+             <div className="flex-1 overflow-y-auto p-6 md:p-10 bg-gray-50/50">
+                <div className="max-w-7xl mx-auto w-full"> {/* Container to constrain width on large screens */}
+                    <Routes>
+                      <Route path="/" element={<h1 className="text-2xl font-bold text-gray-800">Welcome Admin</h1>} />
+                      <Route path="/add" element={<Add token={token} />} />
+                      <Route path="/orders" element={<Orders token={token} />} />
+                      <Route path="/list" element={<List token={token} />} />
+                    </Routes>
+                </div>
+             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

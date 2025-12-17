@@ -56,57 +56,71 @@ const Orders = ({ token }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="p-4"
+      className="max-w-6xl" // Limit width for better reading
     >
-      <h3 className="text-xl font-semibold mb-4">Order Page</h3>
-      <div>
+      <div className="mb-6">
+         <h3 className="text-xl font-bold text-gray-800">Order Management</h3>
+         <p className="text-sm text-gray-500">Track and update customer orders.</p>
+      </div>
+
+      <div className="flex flex-col gap-4">
         {orders.map((order, index) => (
           <motion.div
             key={index}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="grid grid-cols-1 sm:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_1fr_1fr] gap-3 items-start border-2 border-gray-200 p-5 md:p-8 my-3 md:my-4 text-xs sm:text-sm text-gray-700"
+            className="grid grid-cols-1 md:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_1fr_1fr] gap-4 items-start border border-gray-100 bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-sm text-gray-700"
           >
-            <img className="w-12" src={assets.parcel_icon} alt="" />
+            <div className="flex items-center justify-center bg-gray-50 rounded-lg p-3 h-full"> 
+               <img className="w-8 opacity-70" src={assets.parcel_icon} alt="" />
+            </div>
+            
             <div>
-              <div>
+              <div className="mb-2">
                 {order.items.map((item, i) => (
-                  <p className="py-0.5" key={i}>
-                    {item.name} x {item.quantity} <span>{item.size}</span>
+                  <p className="py-0.5 font-medium text-gray-800" key={i}>
+                    {item.name} <span className="text-gray-500 text-xs ml-1">x {item.quantity}</span> <span className="bg-gray-100 px-2 py-0.5 rounded text-xs ml-1">{item.size}</span>
                     {i !== order.items.length - 1 && ","}
                   </p>
                 ))}
               </div>
-              <p className="mt-3 mb-2 font-medium">
-                {order.address.firstName + " " + order.address.lastName}
-              </p>
-              <div>
-                {order.address.city +
-                  ", " +
-                  order.address.state +
-                  ", " +
-                  order.address.country +
-                  ", " +
-                  order.address.zipcode}
+              
+              <div className="text-gray-600 space-y-0.5 mt-3">
+                 <p className="font-semibold text-gray-900 text-base mb-1">{order.address.firstName + " " + order.address.lastName}</p>
+                 <p>{order.address.street}</p>
+                 <p>
+                    {order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.zipcode}
+                 </p>
+                 <p className="flex items-center gap-1 mt-1">
+                    <span className="text-xs font-bold bg-primary/10 text-primary px-2 py-0.5 rounded">TEL</span> {order.address.phone}
+                 </p>
               </div>
-              <p>{order.address.phone}</p>
             </div>
-            <div>
-              <p className="text-sm sm:text-[15px]">
-                Items: {order.items.length}
-              </p>
-              <p className="mt-3">Method: {order.paymentMethod}</p>
-              <p>Payment: {order.payment ? "Done" : "Pending"}</p>
-              <p>Date: {new Date(order.date).toLocaleDateString()}</p>
+
+            <div className="space-y-2">
+              <div className="flex items-center justify-between md:block">
+                 <span className="md:hidden text-gray-500">Items:</span>
+                 <p className="text-gray-800 font-medium">Items: <span className="text-primary">{order.items.length}</span></p>
+              </div>
+              <div className="flex items-center justify-between md:block">
+                 <span className="md:hidden text-gray-500">Method:</span>
+                 <p>Method: {order.paymentMethod}</p>
+              </div>
+              <div className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${order.payment ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                 {order.payment ? "PAID" : "PENDING"}
+              </div>
+               <p className="text-xs text-gray-400 mt-2">Placed: {new Date(order.date).toLocaleDateString()}</p>
             </div>
-            <p className="text-sm sm:text-[15px]">
-              {currency} {order.amount}
-            </p>
+
+            <div className="font-bold text-lg text-gray-800">
+               {currency} {order.amount}
+            </div>
+
             <select
               onChange={(event) => statusHandler(event, order._id)}
               value={order.status}
-              className="p-2 font-semibold border rounded"
+              className="p-2.5 font-medium border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 w-full md:w-auto"
             >
               <option value="Order Placed">Order Placed</option>
               <option value="Packing">Packing</option>
