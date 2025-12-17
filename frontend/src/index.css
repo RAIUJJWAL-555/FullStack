@@ -1,10 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- *{
-    font-family: Outfit;
- }
+
+body {
+   font-family: 'Outfit', sans-serif;
+   @apply bg-white text-gray-800 antialiased;
+}
+
+*{
+   font-family: 'Outfit', sans-serif;
+}
  .prata-regular {
     font-family: "Prata", serif;
     font-weight: 400;

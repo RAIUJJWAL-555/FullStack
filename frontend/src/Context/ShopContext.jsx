@@ -18,6 +18,12 @@ const ShopContextProvider = (props)=>{
 
     const addToCart =async (itemId,size)=>{
 
+        if(!token){
+            toast.error("Please Login to add items to cart");
+            navigate('/login');
+            return;
+        }
+
         let cartData = structuredClone(cartItems);
 
         if(cartData[itemId]){
