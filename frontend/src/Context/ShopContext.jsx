@@ -14,6 +14,7 @@ const ShopContextProvider = (props)=>{
     const[cartItems, setCartItems] = useState({});
     const [products,setProducts] = useState([]);
     const [token,setToken] = useState('');
+    const [loading, setLoading] = useState(true); // Default true so initial render waits
     const navigate = useNavigate();
 
     const addToCart =async (itemId,size)=>{
@@ -107,6 +108,7 @@ const ShopContextProvider = (props)=>{
 
     }
     const getProductsData = async () =>{
+        setLoading(true);
         try {
             const response = await axios.get(backendUrl + '/api/product/list')
             if(response.data.success){
@@ -118,6 +120,8 @@ const ShopContextProvider = (props)=>{
         } catch (error) {
             console.log(error);
             toast.error(error.message)
+        } finally {
+            setLoading(false);
         }
     }
     const getUserCart = async (token) =>{
@@ -145,7 +149,8 @@ const ShopContextProvider = (props)=>{
         products,currency,delivery_fee,
         search,setSearch,showSearch,setShowSearch,setCartItems,
         cartItems,addToCart,getCartCount,updateQuantity,
-        getCartAmount,navigate,backendUrl,token,setToken
+        getCartAmount,navigate,backendUrl,token,setToken,
+        loading // Exposing loading state
     }
 
     return (
