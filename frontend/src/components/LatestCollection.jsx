@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 import { motion } from 'framer-motion'; // Animation Library
 
 const LatestCollection = () => {
-    const { products } = useContext(ShopContext);
+    const { products, loading } = useContext(ShopContext);
     const [latestProducts, setLatestProducts] = useState([]);
 
     useEffect(() => {
@@ -33,6 +33,29 @@ const LatestCollection = () => {
             transition: { duration: 0.6, ease: "easeOut" } 
         }
     };
+
+    if (loading) {
+        return (
+            <div className='my-10'>
+                <div className="text-center py-8 text-3xl">
+                    <Title text1={'LATEST'} text2={'COLLECTIONS'}/>
+                    <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600 mt-2'>
+                        Loading our newest arrivals...
+                    </p>
+                </div>
+                {/* Skeleton Loader */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+                    {[1,2,3,4,5,6,7,8,9,10].map((item) => (
+                        <div key={item} className="animate-pulse">
+                            <div className="bg-gray-200 aspect-[3/4] rounded-lg mb-4"></div>
+                            <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className='my-10'>
